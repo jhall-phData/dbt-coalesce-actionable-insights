@@ -39,3 +39,4 @@ models:
       schema: dbt_coalesce_clean
     model:
       schema: dbt_coalesce_model
+      materialized: table

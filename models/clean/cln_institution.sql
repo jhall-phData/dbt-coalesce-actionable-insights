@@ -1,6 +1,7 @@
 WITH institution AS (
     SELECT name,
            zipcode AS zip_code,
+           {{ dbt_utils.surrogate_key(['name', 'zipcode']) }} AS institution_key,
            TRIM(address) AS address,
            city_name AS city,
            state_name AS state,
@@ -12,6 +13,7 @@ WITH institution AS (
 
 SELECT name,
        zip_code,
+       institution_key,
        address,
        city,
        state,
