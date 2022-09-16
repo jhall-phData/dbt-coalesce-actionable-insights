@@ -37,6 +37,17 @@ models:
     # Applies to all files under models/clean/
     clean:
       schema: dbt_coalesce_clean
+    # applies to all files under models/model/
     model:
       schema: dbt_coalesce_model
       materialized: table
+  # applied to our artifact models
+  dbt_artifacts:
+    +schema: dbt_coalesce_artifact_model
+
+on-run-end: "{{ dbt_artifacts.upload_results(results) }}"
+
+vars:
+  dbt_artifacts_database: user_dkelley
+  dbt_artifacts_schema: dbt_coalesce_artifacts
+  dbt_artifacts_create_schema: true
