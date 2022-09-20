@@ -6,6 +6,10 @@ models:
   columns:
   - name: command_invocation_id
     description: '{{ doc("command_invocation_id") }}'
+    tests:
+      - dbt_constraints.foreign_key:
+          pk_table_name: ref('fct_dbt__invocations')
+          pk_column_name: command_invocation_id
   - name: compile_started_at
     description: '{{ doc("compile_started_at") }}'
   - name: failures
@@ -20,6 +24,10 @@ models:
     description: '{{ doc("status") }}'
   - name: test_execution_id
     description: '{{ doc("test_execution_id") }}'
+    tests:
+      - dbt_constraints.foreign_key:
+          pk_table_name: ref('dim_dbt__tests')
+          pk_column_name: test_execution_id
   - name: thread_id
     description: '{{ doc("thread_id") }}'
   - name: total_node_runtime

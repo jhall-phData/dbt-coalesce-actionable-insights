@@ -6,12 +6,18 @@ models:
   columns:
   - name: command_invocation_id
     description: '{{ doc("command_invocation_id") }}'
+    tests:
+      - dbt_constraints.foreign_key:
+          pk_table_name: ref('fct_dbt__invocations')
+          pk_column_name: command_invocation_id
   - name: depends_on_nodes
     description: '{{ doc("depends_on_nodes") }}'
   - name: description
     description: '{{ doc("description") }}'
   - name: exposure_execution_id
     description: '{{ doc("exposure_execution_id") }}'
+    tests:
+      - dbt_constraints.primary_key
   - name: maturity
     description: '{{ doc("maturity") }}'
   - name: name

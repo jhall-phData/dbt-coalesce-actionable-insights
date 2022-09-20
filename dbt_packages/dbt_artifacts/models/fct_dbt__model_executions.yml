@@ -6,12 +6,20 @@ models:
   columns:
   - name: command_invocation_id
     description: '{{ doc("command_invocation_id") }}'
+    tests:
+      - dbt_constraints.foreign_key:
+          pk_table_name: ref('fct_dbt__invocations')
+          pk_column_name: command_invocation_id
   - name: compile_started_at
     description: '{{ doc("compile_started_at") }}'
   - name: materialization
     description: '{{ doc("materialization") }}'
   - name: model_execution_id
     description: '{{ doc("model_execution_id") }}'
+    tests:
+      - dbt_constraints.foreign_key:
+          pk_table_name: ref('dim_dbt__models')
+          pk_column_name: model_execution_id
   - name: name
     description: '{{ doc("name") }}'
   - name: node_id

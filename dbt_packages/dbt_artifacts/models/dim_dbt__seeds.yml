@@ -8,6 +8,10 @@ models:
     description: '{{ doc("checksum") }}'
   - name: command_invocation_id
     description: '{{ doc("command_invocation_id") }}'
+    tests:
+      - dbt_constraints.foreign_key:
+          pk_table_name: ref('fct_dbt__invocations')
+          pk_column_name: command_invocation_id
   - name: database
     description: '{{ doc("database") }}'
   - name: name
@@ -24,3 +28,5 @@ models:
     description: '{{ doc("schema") }}'
   - name: seed_execution_id
     description: '{{ doc("seed_execution_id") }}'
+    tests:
+      - dbt_constraints.primary_key

@@ -45,6 +45,10 @@ models:
   dbt_artifacts:
     +database: dev_coalesce_demo
     +schema: artifact_model
+    +materialized: table
+    staging:
+      +schema: artifact_model_staging
+      +materialized: view
 
 on-run-end: "{{ dbt_artifacts.upload_results(results) }}"
 
