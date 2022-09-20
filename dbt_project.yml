@@ -33,21 +33,33 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 models:
   dbt_coalesce:
-    database: user_dkelley
+    database: dev_coalesce_demo
     # Applies to all files under models/clean/
     clean:
-      schema: dbt_coalesce_clean
+      schema: clean
     # applies to all files under models/model/
     model:
-      schema: dbt_coalesce_model
+      schema: modeled
       materialized: table
   # applied to our artifact models
   dbt_artifacts:
-    +schema: dbt_coalesce_artifact_model
+    +database: dev_coalesce_demo
+    +schema: artifact_model
 
 on-run-end: "{{ dbt_artifacts.upload_results(results) }}"
 
 vars:
-  dbt_artifacts_database: user_dkelley
-  dbt_artifacts_schema: dbt_coalesce_artifacts
+  # set vars for the dbt_artifacts package
+  dbt_artifacts_database: dev_coalesce_demo
+  dbt_artifacts_schema: artifacts
   dbt_artifacts_create_schema: true
+
+  # The package can be temporarily disabled using this variable
+  dbt_constraints_enabled: true
+  # The package can also add constraints on sources if you have sufficient privileges
+  dbt_constraints_sources_enabled: false
+  # You can also be specific on which constraints are enabled for sources
+  # You must also enable dbt_constraints_sources_enabled above
+  dbt_constraints_sources_pk_enabled: true
+  dbt_constraints_sources_uk_enabled: true
+  dbt_constraints_sources_fk_enabled: true

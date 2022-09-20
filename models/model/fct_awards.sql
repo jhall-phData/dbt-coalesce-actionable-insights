@@ -23,7 +23,8 @@ program_reference AS (
       FROM {{ ref('cln_program_reference_awards') }}
 )
 
-SELECT awards.award_key,
+SELECT {{ dbt_utils.surrogate_key(['awards.award_key', 'institution_awards.institution_key', 'program_element_key', 'organization_key', 'foa_info_key', 'program_reference_key']) }} AS fct_award_key,
+       awards.award_key,
        institution_awards.institution_key,
        organization_key,
        program_element_key,

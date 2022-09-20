@@ -2,8 +2,8 @@ version: 2
 
 sources:
   - name: raw_grants
-    database: user_dkelley
-    schema: dbt_coalesce_raw
+    database: raw_data
+    schema: grants
     tables:
       - name: foa_info
       - name: foa_info_awards
