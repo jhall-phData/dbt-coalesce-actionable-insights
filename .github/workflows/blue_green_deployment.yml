@@ -15,7 +15,7 @@ jobs:
             - name: Call dbt Cloud Job
               run: |
                 curl --silent --write-out '%{http_code}' --fail --output /dev/null --request POST \
-                     --url https://cloud.getdbt.com/api/vs/accounts/${{ secrets.DBT_ACCOUNT }}/jobs/${{ secrets.DBT_JOB }}/run/ \
+                     --url https://cloud.getdbt.com/api/v2/accounts/${{ secrets.DBT_ACCOUNT }}/jobs/${{ secrets.DBT_JOB }}/run/ \
                      --header 'Content-Type: application/json' \
                      --header 'Authorization: Token ${{ secrets.DBT_API_TOKEN }}'
                      --data '{"cause":"Kicked off via GitHub Actions"}'
