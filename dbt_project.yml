@@ -54,7 +54,7 @@ on-run-end: "{{ dbt_artifacts.upload_results(results) }}"
 vars:
   env: DEV
   # set vars for the dbt_artifacts package
-  dbt_artifacts_database: dev_coalesce_demo
+  dbt_artifacts_database: "{{ var("env") }}_coalesce_demo"
   dbt_artifacts_schema: artifacts
   dbt_artifacts_create_schema: true
 
