@@ -1,5 +1,5 @@
 WITH pre_clean AS (
-  SELECT award_title,
+    SELECT award_title,
            REPLACE(award_effective_date, '"', '') AS award_effective_date,
            REPLACE(award_expiration_date, '"', '') AS award_expiration_date,
            award_amount,
