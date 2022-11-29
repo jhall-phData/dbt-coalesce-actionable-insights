@@ -1,5 +1,5 @@
 WITH pre_clean AS (
-  SELECT award_id,
+    SELECT award_id,
            email_id,
            REPLACE(start_date, '"', '') AS start_date,
            REPLACE(end_date, '"', '') AS end_date,

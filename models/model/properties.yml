@@ -75,10 +75,6 @@ models:
               pk_table_name: ref('dim_institution')
               pk_column_name: institution_key
       - name: organization_key
-        tests:
-          - dbt_constraints.foreign_key:
-              pk_table_name: ref('dim_organization')
-              pk_column_name: organization_key
       - name: program_element_key
         tests:
           - dbt_constraints.foreign_key:
