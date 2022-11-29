@@ -1,3 +1,4 @@
+-- just a comment
 WITH organization AS (
     SELECT code,
            {{ dbt_utils.surrogate_key(['code']) }} AS organization_key,
