@@ -26,7 +26,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 
 
 # Configuring seeds
-# Full documentation
+# Full documentation: https://docs.getdbt.com/reference/seed-configs
 seeds:
   dbt_coalesce:
     database: seed_example
@@ -55,7 +55,10 @@ models:
       +schema: artifact_model_staging
       +materialized: view
 
-on-run-end: "{% if target.name == 'PROD' %}{{ dbt_artifacts.upload_results(results) }}{% endif %}"
+on-run-start:
+  - '{{create_udfs()}}'
+on-run-end: 
+  - "{% if target.name == 'PROD' %}{{ dbt_artifacts.upload_results(results) }}{% endif %}"
 
 vars:
   env: DEV
