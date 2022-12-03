@@ -56,7 +56,7 @@ models:
       +materialized: view
 
 on-run-start:
-  - '{{create_udfs()}}'
+  - '{{ create_udfs() }}'
 on-run-end: 
   - "{% if target.name == 'PROD' %}{{ dbt_artifacts.upload_results(results) }}{% endif %}"
 
