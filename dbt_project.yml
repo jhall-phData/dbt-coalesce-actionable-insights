@@ -25,12 +25,16 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "dbt_packages"
 
 
+# Configuring seeds
+# Full documentation
+seeds:
+  dbt_coalesce:
+    database: seed_example
+    schema: grants
+
+
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
-
-# In this example config, we tell dbt to build all models in the example/ directory
-# as tables. These settings can be overridden in the individual model files
-# using the `{{ config(...) }}` macro.
 models:
   dbt_coalesce:
     database: coalesce_demo
