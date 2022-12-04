@@ -1,0 +1,23 @@
+version: 2
+
+exposures:
+  - name: grants_metrics
+    type: dashboard
+    maturity: high
+    url: https://bi.tool/dashboards/1
+    description: >
+      Dashboard to explore and visualize the grant metrics
+
+    depends_on:
+      - ref('dim_awards')
+      - ref('dim_dates')
+      - ref('dim_foa_info')
+      - ref('dim_institution')
+      - ref('dim_organization')
+      - ref('dim_program_element')
+      - ref('dim_program_reference')
+      - ref('fct_awards')
+
+    owner:
+      name: Head of Grants
+      email: grants_data@university.edu
