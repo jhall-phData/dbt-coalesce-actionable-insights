@@ -17,18 +17,6 @@ exposures:
       - ref('dim_program_element')
       - ref('dim_program_reference')
       - ref('fct_awards')
-      - source('raw_grants', 'foa_info')
-      - source('raw_grants', 'foa_info_awards')
-      - source('raw_grants', 'institution')
-      - source('raw_grants', 'institution_awards')
-      - source('raw_grants', 'awards')
-      - source('raw_grants', 'investigator_awards')
-      - source('raw_grants', 'organization')
-      - source('raw_grants', 'investigator')
-      - source('raw_grants', 'program_element_awards')
-      - source('raw_grants', 'program_element')
-      - source('raw_grants', 'program_reference_awards')
-      - source('raw_grants', 'program_reference')
 
     owner:
       name: Head of Grants
