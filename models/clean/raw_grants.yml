@@ -10,6 +10,14 @@ sources:
       - name: institution
       - name: institution_awards
       - name: awards
+        freshness:
+          warn_after:
+            count: 3000
+            period: day
+          error_after:
+            count: 4000
+            period: day
+        loaded_at_field: award_loaded_at_date
       - name: investigator_awards
       - name: organization
       - name: investigator
