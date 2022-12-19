@@ -1,3 +1,4 @@
+-- add comment
 WITH awards AS (
     SELECT *
       FROM {{ ref('cln_awards') }}
