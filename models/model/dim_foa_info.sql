@@ -1,4 +1,3 @@
--- add comment
 WITH foa_info AS (
     SELECT foa_info_key,
            name

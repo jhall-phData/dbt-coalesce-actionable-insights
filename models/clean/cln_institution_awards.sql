@@ -1,4 +1,3 @@
--- comment
 WITH institution_awards AS (
     SELECT award_id,
            {{ dbt_utils.surrogate_key(['award_id']) }} AS award_key,

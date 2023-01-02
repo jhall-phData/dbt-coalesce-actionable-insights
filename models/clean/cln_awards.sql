@@ -13,7 +13,7 @@ WITH pre_clean AS (
            award_id
     FROM {{ source('raw_grants', 'awards')}}
 ),
--- comment
+
 awards AS (
     SELECT award_title,
            DECODE(award_effective_date, '', NULL, TO_DATE(award_effective_date, 'MM/DD/YYYY')) AS award_effective_date,
