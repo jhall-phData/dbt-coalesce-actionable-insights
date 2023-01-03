@@ -5,7 +5,7 @@ WITH organization AS (
            directorate
       FROM {{ source('raw_grants', 'organization') }}
 )
-
+-- comment here
 SELECT code,
        organization_key,
        division,
