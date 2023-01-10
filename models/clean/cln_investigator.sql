@@ -5,7 +5,7 @@ WITH investigator AS (
            last_name
       FROM {{ source('raw_grants', 'investigator') }}
 )
-
+-- add comment
 SELECT email_id,
        first_name,
        last_name
