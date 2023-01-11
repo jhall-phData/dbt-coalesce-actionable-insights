@@ -10,7 +10,7 @@ WITH institution AS (
            REGEXP_REPLACE(contact, '([[:digit:]]{3})([[:digit:]]{3})([[:digit:]]{4})', '(\\1) \\2-\\3') phone_number
       FROM {{ source('raw_grants', 'institution') }}
 )
-
+-- just a comment
 SELECT name,
        zip_code,
        institution_key,
