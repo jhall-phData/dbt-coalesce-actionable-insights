@@ -9,7 +9,7 @@ WITH program_reference_awards AS (
            code IN (SELECT code
                       FROM {{ source('raw_grants', 'program_reference') }} )
 )
-
+-- add comment
 SELECT award_id,
        award_key,
        code,
