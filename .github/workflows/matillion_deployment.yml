@@ -1,0 +1,42 @@
+name: Call Matillion on Production
+
+on: 
+  push:
+    branches: 
+      - 'fake_repo'
+
+jobs:
+  run_dbt_on_merge_to_master:
+    name: Matillion Production Run on Push to Main
+    runs-on: ubuntu-latest
+
+    env:
+      MATILLION_API_USER:     # error if no value, API username to connect to Matillion
+      MATILLION_API_PASS:     # error if no value, API password to connect to Matillion
+      MATILLION_API_BASE:     # error if no value, base url to connect to
+      MATILLION_GROUP_NAME:   # error if no value, group name
+      MATILLION_PROJECT_NAME: # error if no value, project name
+      MATILLION_VERSION_NAME: # error if no value, version name
+      MATILLION_JOB_NAME:     # error if no value, job name
+      MATILLION_ENV_NAME:     # error if no value, env name
+
+      DBT_API_KEY:             ${{ secrets.DBT_API_TOKEN }}
+      DBT_URL:                 https://cloud.getdbt.com # no trailing backslash. Change this for single tenant deployments to your actual base url
+      DBT_JOB_CAUSE:           'Github Actions - Push to Main' # provide a descriptive job cause here for easy debugging down the road
+      DBT_ACCOUNT_ID:          17878
+      DBT_PROJECT_ID:          159017
+      DBT_PR_JOB_ID:           169774
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.x
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests
+    - name: Trigger dbt job
+      run: |
+        python -u ./python/run_and_monitor_dbt_cloud_job.py
