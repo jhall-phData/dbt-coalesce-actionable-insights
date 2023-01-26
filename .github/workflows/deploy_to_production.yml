@@ -30,4 +30,4 @@ jobs:
         pip install requests
     - name: Trigger dbt job
       run: |
-        python -u ./python/run_and_monitor_matillion_orchestration.py
+        python -u ./python/run_and_monitor_dbt_cloud_job.py
