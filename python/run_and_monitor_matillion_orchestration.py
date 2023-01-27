@@ -38,7 +38,7 @@ def run_job(url, user, user_pass) -> int:
     """
     Runs a Matillion Job
     """
-    # build payload
+    # build payload - can build a json to overload the grid variables
 
     # trigger job
     print(f'Triggering job:\n\turl: {url}')

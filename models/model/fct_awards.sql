@@ -1,6 +1,6 @@
 -- depends_on: {{ ref('cln_program_reference') }}
 -- depends_on: {{ ref('cln_investigator') }}
-
+-- some comment
 WITH awards AS (
     SELECT *
       FROM {{ ref('cln_awards') }}
