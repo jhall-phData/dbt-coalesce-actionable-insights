@@ -19,5 +19,6 @@ SELECT name,
        state,
        state_code,
        country,
-       DECODE(phone_number,'0',NULL,phone_number) AS phone_number
+       DECODE(phone_number,'0',NULL,phone_number) AS phone_number,
+       'STAGE' AS stage_name
   FROM institution
