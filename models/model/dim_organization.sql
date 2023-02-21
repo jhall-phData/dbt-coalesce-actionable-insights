@@ -1,7 +1,8 @@
 WITH organization AS (
     SELECT organization_key,
            division,
-           directorate
+           directorate,
+           'cln_organization' AS root_table
       FROM {{ ref('cln_organization') }}
 )
 
