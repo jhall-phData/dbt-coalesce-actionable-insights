@@ -7,7 +7,8 @@ WITH institution AS (
            state,
            state_code,
            country,
-           phone_number
+           phone_number,
+           'some_data' AS some_data
       FROM {{ ref('cln_institution') }}
 )
 
