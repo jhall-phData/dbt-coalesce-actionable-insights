@@ -3,7 +3,8 @@ WITH pre_clean AS (
            email_id,
            REPLACE(start_date, '"', '') AS start_date,
            REPLACE(end_date, '"', '') AS end_date,
-           role_code
+           role_code,
+           'random_column' AS random_column
     FROM {{ source('raw_grants', 'investigator_awards') }}
 ),
 
@@ -14,7 +15,8 @@ investigator_awards AS (
            {{ dbt_utils.surrogate_key(['email_id']) }} AS investigator_key,
            DECODE(start_date, '', NULL, TO_DATE(start_date, 'MM/DD/YYYY')) AS start_date,
            DECODE(end_date, '', NULL, TO_DATE(end_date, 'MM/DD/YYYY')) AS end_date,
-           role_code
+           role_code,
+           random_column
       FROM pre_clean
      WHERE award_id IN (SELECT award_id
                           FROM {{ source('raw_grants', 'awards') }} ) AND
