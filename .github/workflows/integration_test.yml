@@ -59,11 +59,11 @@ jobs:
       run: install/toolkit ds diff prod:profile:new test:profile:new
     
     - name: Generate Diff HTML
-      run: install/toolkit ds show prod.test:diff:latest --format html -o profile.html
+      run: install/toolkit ds show prod.test:diff:latest --format html -o index.html
     
     - uses: EndBug/add-and-commit@v9
       with:
-        add: 'profile.html'
+        add: 'index.html'
         message: Show GitHub Actions logo
         committer_name: GitHub Actions
         committer_email: actions@github.com
