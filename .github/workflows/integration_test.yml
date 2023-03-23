@@ -41,12 +41,8 @@ jobs:
       run: |
         python -u ./python/run_and_monitor_dbt_cloud_job.py
 
-    - name: Move to the toolkit directory
-      run: |
-        cd ./toolkit
-
     - name: Download the toolkit-cli
-      run: install-toolkit-cli
+      run: toolkit/install-toolkit-cli
       shell: bash
 
     - name: Set up Java 
