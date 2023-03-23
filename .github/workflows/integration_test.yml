@@ -42,8 +42,9 @@ jobs:
         python -u ./python/run_and_monitor_dbt_cloud_job.py
 
     - name: Download the toolkit-cli
-      run: toolkit/install-toolkit-cli
-      shell: bash
+      run: |
+        curl --fail --output toolkit-cli.zip "$TOOLKIT_CLI_DOWNLOAD_URL"
+        unzip -jd install toolkit-cli.zip
 
     - name: Set up Java 
       uses: actions/setup-java@v3
