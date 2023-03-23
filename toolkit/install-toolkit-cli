@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 set -euo pipefail
 
 curl --fail --output toolkit-cli.zip "$TOOLKIT_CLI_DOWNLOAD_URL"
