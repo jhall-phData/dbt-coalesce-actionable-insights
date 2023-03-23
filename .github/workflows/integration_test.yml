@@ -17,12 +17,12 @@ jobs:
       DBT_ACCOUNT_ID:             17878
       DBT_PROJECT_ID:             159017
       DBT_PR_JOB_ID:              169774
-      TOOLKIT_AUTH_TOKEN:         ${{ secrets.toolkit_auth_token }}
-      TOOLKIT_CLI_DOWNLOAD_URL:   ${{ secrets.toolkit_cli_download_url }}
+      TOOLKIT_AUTH_TOKEN:         ${{ secrets.TOOLKIT_AUTH_TOKEN }}
+      TOOLKIT_CLI_DOWNLOAD_URL:   ${{ secrets.TOOLKIT_CLI_DOWNLOAD_URL }}
       TOOLKIT_CLI_VERSION:        "0.10.0"
-      SNOWFLAKE_USERNAME:         ${{ secrets.snowflake_username }}
-      SNOWFLAKE_URL:              ${{ secrets.snowflake_url }}
-      SNOWFLAKE_PASSWORD:         ${{ secrets.snowflake_password }}
+      SNOWFLAKE_USERNAME:         ${{ secrets.SNOWFLAKE_USERNAME }}
+      SNOWFLAKE_URL:              ${{ secrets.SNOWFLAKE_URL }}
+      SNOWFLAKE_PASSWORD:         ${{ secrets.SNOWFLAKE_PASSWORD }}
 
     steps:
     - uses: actions/checkout@v2
