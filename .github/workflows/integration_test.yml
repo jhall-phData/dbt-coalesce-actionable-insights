@@ -16,7 +16,7 @@ jobs:
       DBT_JOB_CAUSE:              'Github Actions - Push to Main' # provide a descriptive job cause here for easy debugging down the road
       DBT_ACCOUNT_ID:             17878
       DBT_PROJECT_ID:             159017
-      DBT_PR_JOB_ID:              169774
+      DBT_PR_JOB_ID:              169773
       TOOLKIT_AUTH_TOKEN:         ${{ secrets.TOOLKIT_AUTH_TOKEN }}
       TOOLKIT_CLI_DOWNLOAD_URL:   ${{ secrets.TOOLKIT_CLI_DOWNLOAD_URL }}
       TOOLKIT_CLI_VERSION:        "0.10.0"
@@ -63,12 +63,6 @@ jobs:
     
     - name: Generate Diff HTML
       run: install/toolkit ds show prod.test:diff:latest --format html -o profile.html
-      
-    - name: Capture Profile Screenshot
-      uses: saadmk11/comment-website-screenshot@v0.5
-      with:
-        upload_to: github_branch
-        # Capture Screenshots of Changed HTML Files
-        capture_changed_html_files: yes
-        # Comma separated paths to any other HTML File
-        capture_html_file_paths: "profile.html"
+    
+    - name: List Files
+      run: ls -al
