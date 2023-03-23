@@ -51,12 +51,6 @@ jobs:
       with:
         java-version: 11
         distribution: corretto
-    
-    - name: Profile test
-      run: install/toolkit ds profile test
-
-    - name: Profile prod
-      run: install/toolkit ds profile prod
 
     - name: Diff Data Sources
       run: install/toolkit ds diff prod:profile:new test:profile:new
@@ -64,5 +58,7 @@ jobs:
     - name: Generate Diff HTML
       run: install/toolkit ds show prod.test:diff:latest --format html -o profile.html
     
-    - name: List Files
-      run: ls -al
+    - uses: actions/upload-artifact@v3
+      with:
+        name: profile.html
+        path: profile.html
