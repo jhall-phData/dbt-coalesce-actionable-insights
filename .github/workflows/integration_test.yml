@@ -67,3 +67,10 @@ jobs:
         message: Show GitHub Actions logo
         committer_name: GitHub Actions
         committer_email: actions@github.com
+    
+    - name: Embed link to profiles
+      uses: peter-evans/create-or-update-comment@v2
+      with:
+        issue-number: ${{ github.event.pull_request.number }}
+        body: |
+          ![data_diff_img.png](https://optimizedgradient.github.io/dbt-coalesce-actionable-insights/data_diff_img.png)(https://optimizedgradient.github.io/dbt-coalesce-actionable-insights/index.html)
