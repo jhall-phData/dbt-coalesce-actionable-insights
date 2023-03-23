@@ -62,7 +62,7 @@ jobs:
       run: install/toolkit ds diff prod:profile:new test:profile:new
     
     - name: Generate Diff HTML
-      run: install/toolkit ds show prod.test:diff:latest --format html -o ./profile.html
+      run: install/toolkit ds show prod.test:diff:latest --format html -o profile.html
 
     - name: HTML Preview
       id: html_preview
