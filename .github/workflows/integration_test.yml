@@ -63,9 +63,12 @@ jobs:
     
     - name: Generate Diff HTML
       run: install/toolkit ds show prod.test:diff:latest --format html -o profile.html
-
-    - name: Create Profile
-      uses: peter-evans/create-or-update-comment@v2
+      
+    - name: Capture Profile Screenshot
+      uses: saadmk11/comment-website-screenshot@v0.5
       with:
-        issue-number: ${{ github.event.pull_request.number }}
-        body-file: 'profile.html'
+        upload_to: github_branch
+        # Capture Screenshots of Changed HTML Files
+        capture_changed_html_files: yes
+        # Comma separated paths to any other HTML File
+        capture_html_file_paths: "profile.html"
