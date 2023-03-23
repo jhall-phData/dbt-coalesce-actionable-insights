@@ -64,8 +64,8 @@ jobs:
     - name: Generate Diff HTML
       run: install/toolkit ds show prod.test:diff:latest --format html -o profile.html
 
-    - name: HTML Preview
-      id: html_preview
-      uses: pavi2410/html-preview-action@v2
+    - name: Create Profile
+      uses: peter-evans/create-or-update-comment@v2
       with:
-        html_file: 'profile.html'
+        issue-number: ${{ github.event.pull_request.number }}
+        body-file: 'profile.html'
