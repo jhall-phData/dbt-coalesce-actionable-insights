@@ -58,7 +58,8 @@ jobs:
     - name: Generate Diff HTML
       run: install/toolkit ds show prod.test:diff:latest --format html -o profile.html
     
-    - uses: actions/upload-artifact@v3
+    - uses: EndBug/add-and-commit@v9
       with:
-        name: profile.html
-        path: profile.html
+        message: Show GitHub Actions logo
+        committer_name: GitHub Actions
+        committer_email: actions@github.com
