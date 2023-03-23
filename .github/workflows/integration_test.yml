@@ -73,4 +73,4 @@ jobs:
       with:
         issue-number: ${{ github.event.pull_request.number }}
         body: |
-          ![data_diff_img.png](https://optimizedgradient.github.io/dbt-coalesce-actionable-insights/data_diff_img.png)(https://optimizedgradient.github.io/dbt-coalesce-actionable-insights/index.html)
+          [![data_diff_img.png](https://optimizedgradient.github.io/dbt-coalesce-actionable-insights/data_diff_img.png)](https://optimizedgradient.github.io/dbt-coalesce-actionable-insights/index.html)
