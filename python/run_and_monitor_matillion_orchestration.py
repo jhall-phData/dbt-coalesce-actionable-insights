@@ -58,7 +58,8 @@ def get_run_status(url, user, user_pass) -> str:
     if req_status_resp.status_code == 200:
         for line in req_status_resp.iter_lines():
             if line:
-                print(f'Get Run Status Response: {line.replace('"', '').split()}')
+                split_chunk = line.replace('"', '').split()
+                print(f'Get Run Status Response: {split_chunk}')
     json_resp = json.loads(req_status_resp)
 
     # return status
