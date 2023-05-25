@@ -55,8 +55,8 @@ def get_run_status(url, user, user_pass) -> str:
     """
     # get status
     req_status_resp = requests.get(url, auth=HTTPBasicAuth(user, user_pass), stream=True, timeout=10)
-    if resp.status_code == 200:
-        for line in resp.iter_lines():
+    if req_status_resp.status_code == 200:
+        for line in req_status_resp.iter_lines():
             print(f'Get Run Status Response: {line}')
     json_resp = json.loads(req_status_resp)
 
