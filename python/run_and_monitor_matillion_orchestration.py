@@ -31,7 +31,7 @@ job_name: {job_name}
 # use environment variables to set configuration
 # ------------------------------------------------------------------------------
 req_job_url = f'{api_base}/rest/v1/group/name/{group_name}/project/name/{project_name}/version/name/{version_name}/job/name/{job_name}/run?environmentName={env_name}'
-req_task_status = f'{api_base}/rest/v1/group/name/{group_name}/project/name/{project_name}/task/id'
+req_task_status = f'{api_base}/rest/v1/group/name/{group_name}/project/name/{project_name}/task/instance'
 # ------------------------------------------------------------------------------
 
 def run_job(url, user, user_pass) -> int:
@@ -43,6 +43,7 @@ def run_job(url, user, user_pass) -> int:
     # trigger job
     print(f'Triggering job:\n\turl: {url}')
     run_job_resp = requests.post(url, auth=HTTPBasicAuth(user, user_pass)).text
+    print(
     json_resp = json.loads(run_job_resp)
 
     return json_resp['id']
