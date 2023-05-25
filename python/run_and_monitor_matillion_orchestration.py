@@ -43,7 +43,7 @@ def run_job(url, user, user_pass) -> int:
     # trigger job
     print(f'Triggering job:\n\turl: {url}')
     run_job_resp = requests.post(url, auth=HTTPBasicAuth(user, user_pass)).text
-    print(
+    print(f'Run Job Response: {run_job_resp}')
     json_resp = json.loads(run_job_resp)
 
     return json_resp['id']
@@ -55,6 +55,7 @@ def get_run_status(url, user, user_pass) -> str:
     """
     # get status
     req_status_resp = requests.get(url, auth=HTTPBasicAuth(user, user_pass)).text
+    print(f'Get Run Status Response: {req_status_resp}')
     json_resp = json.loads(req_status_resp)
 
     # return status
