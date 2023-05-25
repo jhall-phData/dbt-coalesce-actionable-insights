@@ -60,6 +60,9 @@ def get_run_status(url, user, user_pass) -> str:
             if line:
                 split_chunk = line.decode('utf-8').replace('"', '').split()
                 print(f'Get Run Status Response: {split_chunk}')
+                if split_chunk[0] == 'state':
+                    req_status_resp.close()
+                    return split_chunk[2]
     json_resp = json.loads(req_status_resp)
 
     # return status
