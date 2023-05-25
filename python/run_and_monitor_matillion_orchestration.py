@@ -74,7 +74,7 @@ def main():
         raise
 
     # build status check url
-    req_status_url = f'{req_task_status}/{run_id}/state'
+    req_status_url = f'{req_task_status}/history'
 
     # check status indefinitely with an initial wait period
     time.sleep(30)
