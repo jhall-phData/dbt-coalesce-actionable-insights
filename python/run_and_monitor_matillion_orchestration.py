@@ -31,7 +31,7 @@ job_name: {job_name}
 # use environment variables to set configuration
 # ------------------------------------------------------------------------------
 req_job_url = f'{api_base}/rest/v1/group/name/{group_name}/project/name/{project_name}/version/name/{version_name}/job/name/{job_name}/run?environmentName={env_name}'
-req_task_status = f'{api_base}/rest/v1/group/name/{group_name}/project/name/{project_name}/task/'
+req_task_status = f'{api_base}/rest/v1/group/name/{group_name}/project/name/{project_name}/task'
 # ------------------------------------------------------------------------------
 
 def run_job(url, user, user_pass) -> int:
