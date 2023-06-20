@@ -31,7 +31,7 @@ job_name: {job_name}
 # use environment variables to set configuration
 # ------------------------------------------------------------------------------
 req_job_url = f'{api_base}/rest/v1/group/name/{group_name}/project/name/{project_name}/version/name/{version_name}/job/name/{job_name}/run?environmentName={env_name}'
-req_task_status = f'{api_base}/rest/v1/group/name/{group_name}/project/name/{project_name}/task/id'
+req_task_status = f'{api_base}/rest/v1/group/name/{group_name}/project/name/{project_name}/task'
 # ------------------------------------------------------------------------------
 
 def run_job(url, user, user_pass) -> int:
@@ -43,6 +43,7 @@ def run_job(url, user, user_pass) -> int:
     # trigger job
     print(f'Triggering job:\n\turl: {url}')
     run_job_resp = requests.post(url, auth=HTTPBasicAuth(user, user_pass)).text
+    print(f'Run Job Response: {run_job_resp}')
     json_resp = json.loads(run_job_resp)
 
     return json_resp['id']
@@ -53,7 +54,15 @@ def get_run_status(url, user, user_pass) -> str:
     Requests a Matillion Task Status
     """
     # get status
-    req_status_resp = requests.get(url, auth=HTTPBasicAuth(user, user_pass)).text
+    req_status_resp = requests.get(url, auth=HTTPBasicAuth(user, user_pass), stream=True, timeout=10)
+    if req_status_resp.status_code == 200:
+        for line in req_status_resp.iter_lines():
+            if line:
+                split_chunk = line.decode('utf-8').replace('"', '').split()
+                print(f'Get Run Status Response: {split_chunk}')
+                if split_chunk[0] == 'state':
+                    req_status_resp.close()
+                    return split_chunk[2]
     json_resp = json.loads(req_status_resp)
 
     # return status
@@ -72,7 +81,7 @@ def main():
         raise
 
     # build status check url
-    req_status_url = f'{req_task_status}/{run_id}'
+    req_status_url = f'{req_task_status}/id/{run_id}'
 
     # check status indefinitely with an initial wait period
     time.sleep(30)
