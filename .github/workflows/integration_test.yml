@@ -1,0 +1,76 @@
+name: dbt Integration Test Run on PR
+
+on:
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  run_dbt_on_pr:
+    name: dbt Integration Test Run on PR
+    runs-on: ubuntu-latest
+
+    env:
+      DBT_API_KEY:                ${{ secrets.DBT_API_TOKEN }}
+      DBT_URL:                    https://cloud.getdbt.com # no trailing backslash. Change this for single tenant deployments to your actual base url
+      DBT_JOB_CAUSE:              'Github Actions - Push to Main' # provide a descriptive job cause here for easy debugging down the road
+      DBT_ACCOUNT_ID:             17878
+      DBT_PROJECT_ID:             159017
+      DBT_PR_JOB_ID:              169773
+      TOOLKIT_AUTH_TOKEN:         ${{ secrets.TOOLKIT_AUTH_TOKEN }}
+      TOOLKIT_CLI_DOWNLOAD_URL:   ${{ secrets.TOOLKIT_CLI_DOWNLOAD_URL }}
+      TOOLKIT_CLI_VERSION:        "0.10.0"
+      SNOWFLAKE_USERNAME:         ${{ secrets.SNOWFLAKE_USERNAME }}
+      SNOWFLAKE_URL:              ${{ secrets.SNOWFLAKE_URL }}
+      SNOWFLAKE_PASSWORD:         ${{ secrets.SNOWFLAKE_PASSWORD }}
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        repository: ${{ github.event.pull_request.head.repo.full_name }}
+        ref: ${{ github.event.pull_request.head.ref }}
+
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.x
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests
+
+    - name: Trigger dbt job
+      run: |
+        python -u ./python/run_and_monitor_dbt_cloud_job.py
+
+    - name: Download the toolkit-cli
+      run: |
+        curl --fail --output toolkit-cli.zip "$TOOLKIT_CLI_DOWNLOAD_URL"
+        unzip -jd install toolkit-cli.zip
+
+    - name: Set up Java 
+      uses: actions/setup-java@v3
+      with:
+        java-version: 11
+        distribution: corretto
+
+    - name: Diff Data Sources
+      run: install/toolkit ds diff prod:profile:new test:profile:new
+    
+    - name: Generate Diff HTML
+      run: install/toolkit ds show prod.test:diff:latest --format html -o docs/index.html
+    
+    - uses: EndBug/add-and-commit@v9
+      with:
+        add: 'docs/index.html'
+        message: Show GitHub Actions logo
+        committer_name: GitHub Actions
+        committer_email: actions@github.com
+    
+    - name: Embed link to profiles
+      uses: peter-evans/create-or-update-comment@v2
+      with:
+        issue-number: ${{ github.event.pull_request.number }}
+        body: |
+          [![data_diff_img.png](https://optimizedgradient.github.io/dbt-coalesce-actionable-insights/data_diff_img.png)](https://optimizedgradient.github.io/dbt-coalesce-actionable-insights/index.html)
