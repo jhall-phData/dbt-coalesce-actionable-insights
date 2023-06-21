@@ -10,5 +10,6 @@ WITH organization AS (
 SELECT code,
        organization_key,
        division,
-       directorate
+       directorate,
+       'TEST' as random_str
   FROM organization
