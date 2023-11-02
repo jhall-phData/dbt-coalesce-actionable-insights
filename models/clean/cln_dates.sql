@@ -14,6 +14,5 @@ SELECT date_day,
        MONTHNAME(date_day) AS month_name,
        WEEK(date_day) AS week,
        DAY(date_day) AS day,
-       DAYNAME(date_day) AS day_name,
-       CURRENT_DATE AS THIS_IS_NOW
+       DAYNAME(date_day) AS day_name
   FROM dates
