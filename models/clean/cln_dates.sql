@@ -15,5 +15,6 @@ SELECT date_day,
        WEEK(date_day) AS week,
        DAY(date_day) AS day,
        DAYNAME(date_day) AS day_name,
-       CURRENT_DATE AS THIS_IS_TODAYS_DATE
+       CURRENT_DATE AS THIS_IS_TODAYS_DATE,
+       CURRENT_DATE AS ANOTHER_DATE
   FROM dates
